@@ -1,0 +1,58 @@
+﻿@model GuildCars.UI.Models.MakesVM
+@{
+    ViewBag.Title = "Makes";
+}
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-6 offset-sm-0 offset-md-2 offset-lg-3">
+        <h2 class="page-header">Makes</h2>
+    </div>
+</div>
+
+<div class="row justify-content-evenly">
+    <div id="addMakeContainer" class="col-sm-12 col-md-8 col-lg-6">
+        @using (Html.BeginForm("Makes", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddMake", name = "frmAddMake", @class = "row-g3" }))
+        {
+            @Html.ValidationSummary()
+            if (TempData["UserMessage"] != null)
+            {
+                <div class="alert alert-success"><strong>@TempData["UserMessage"].ToString()</strong></div>
+            }
+            <div class="row my-3 gap-2 align-items-center justify-content-center">
+                <div class="col-auto">
+                    <label class="form-label" for="Make.MakeName">New Make</label>
+                </div>
+                <div class="col-auto">
+                    @Html.TextBoxFor(m => m.Make.MakeName, new { @class = "form-control" })
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit" id="frmAddMakeSave">Save</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div id="" class="col-sm-12 col-md-8 col-lg-6">
+        <table id="makesTable" class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Make Name</th>
+                    <th>Date Added</th>
+                    <th>Added by User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var m in Model.Makes)
+                {
+                    <tr>
+                        <td>@m.MakeName</td>
+                        <td>@m.DateAdded.ToString("M/dd/yyyy")</td>
+                        <td>@m.EmployeeEmail</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

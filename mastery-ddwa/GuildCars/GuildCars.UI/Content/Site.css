@@ -1,0 +1,241 @@
+﻿:root {
+    --bright-green: #22f0bb;
+    --dark-green: #1c7860;
+    --gradient: linear-gradient(90deg, rgba(4,33,26,1) 0%, rgba(28,120,96,1) 35%, rgba(28,120,96,1) 65%, rgba(4,33,26,1) 100%);
+    --translucent-bg-color: rgba(0, 0, 0, .4);
+}
+
+h2 {
+    
+}
+
+.page-header {
+    margin: 10px 20px 10px 20px;
+    padding: 10px;
+}
+
+.sales-info-header {
+    margin-top: 30px;
+}
+
+.btn-primary{
+    background-color: var(--dark-green);
+    color: var(--bs-light);
+    border: 2px solid var(--bs-light);
+}
+
+.btn-primary:hover{
+    background-color: var(--bright-green);
+    border-color: var(--bright-green);
+    color: var(--bs-dark);
+}
+
+.btn-primary:focus{
+    background-color: var(--dark-green);
+    border-color: var(--bright-green);
+}
+
+.has-success{
+    color: mediumspringgreen;
+}
+
+.has-error {
+    color: red;
+    background-color: var(--translucent-bg-color);
+    padding: 2px;
+    margin: 2px;
+    border-radius: .3rem;
+}
+
+.validation-summary-errors{
+    padding-top: 10px;
+    color: red;
+    background-color: var(--translucent-bg-color);
+    border-radius: .3rem;
+}
+
+.validation-summary-errors > ul{
+    list-style: none;
+}
+
+body {
+    color: white;
+    background: var(--gradient);
+    margin-top: 20px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.img-thumbnail{
+    border: none;
+    background-color: transparent;
+}
+
+.jumbotron {
+    background-image: url("/Assets/pexels-brett-sayles-2771785.jpg");
+    position: sticky;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 4rem 2rem;
+    margin-bottom: 2rem;
+    background-color: transparent;
+    border-radius: .3rem;
+}
+
+.jumbotron h1 {
+    text-align: center;
+    font-size: 4em;
+}
+
+#saleHeader {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+}
+
+.jumbotron p {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.jumbotron img {
+    max-width: 250px;
+    margin: auto;
+    display: block;
+}
+.card {
+    padding: 10px;
+    color: var(--bs-light);
+    background-color: var(--translucent-bg-color);
+    border: 2px solid var(--bs-dark);
+}
+
+.card-title {
+    margin-bottom: -10px;
+}
+.card img {
+    max-width: 200px;
+    margin-bottom: -10px;
+}
+
+.special-card {
+    background-color: var(--translucent-bg-color);
+    border: 3px solid var(--bs-dark);
+    border-radius: .3rem;
+    margin-bottom: 20px;
+}
+
+.vehicle-wide-card {
+    margin-top: 30px;
+    padding: 20px;
+    border: solid;
+    border-color: var(--bs-dark);
+    border-radius: .3em;
+    background-color: var(--translucent-bg-color);
+    color: white;
+}
+
+#searchContainer {
+    background-color: var(--translucent-bg-color);
+    padding: 15px 10px 15px 10px;
+    border: 2px solid var(--bs-dark);
+    border-radius: .3rem;
+}
+
+.contact-form {
+    background-color: var(--translucent-bg-color);
+    border: 2px solid var(--bs-dark);
+    border-radius: .5rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.google-maps{
+    position: relative;
+    padding-bottom: 75%;
+    height: 0;
+    overflow: hidden;
+}
+
+.google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#frmPurchase {
+    background-color: var(--translucent-bg-color);
+    padding: 20px;
+    margin: 20px;
+}
+
+.sales-info-header{
+    text-align:center;
+}
+
+#addVehicleContainer {
+    background-color: var(--translucent-bg-color);
+    border: 3px solid var(--bs-dark);
+    border-radius: .3rem;
+}
+
+#addMakeContainer {
+    background-color: var(--translucent-bg-color);
+    border: 3px solid var(--bs-dark);
+    border-radius: .3rem;
+}
+
+#makesTable {
+    text-align: center;
+    border: 3px solid var(--bs-dark);
+    margin-top: 20px;
+}
+
+#addModelContainer {
+    background-color: var(--translucent-bg-color);
+    border: 3px solid var(--bs-dark);
+    border-radius: .3rem;
+}
+
+#addSpecialContainer {
+    background-color: var(--translucent-bg-color);
+    border: 3px solid var(--bs-dark);
+    border-radius: .3rem;
+    margin-bottom: 40px;
+}
+
+#salesReportSearchForm {
+    background-color: var(--translucent-bg-color);
+    border: 3px solid var(--bs-dark);
+    border-radius: .3rem;
+}
+
+#reportsLinks {
+    background-color: var(--translucent-bg-color);
+    border: 3px solid var(--bs-dark);
+    border-radius: .3rem;
+    padding: 20px;
+}

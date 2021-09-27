@@ -1,0 +1,288 @@
+﻿@model GuildCars.UI.Models.VehicleAddVM
+@{
+    ViewBag.Title = "AddVehicle";
+}
+
+<div class="row">
+
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-6 offset-sm-0 offset-md-2 offset-lg-3 offset-xl-3">
+        <h2 class="page-header">Add Vehicle</h2>
+    </div>
+    <div id="addVehicleContainer" class="col-sm-12 col-md-8 col-lg-6 offset-sm-0 offset-md-2 offset-lg-3 offset-xl-3">
+        @using (Html.BeginForm("AddVehicle", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddVehicle", name = "frmAddVehicle", @class = "row g-3" }))
+        {
+            @Html.ValidationSummary()
+            if (TempData["UserMessage"] != null)
+            {
+                <div class="alert alert-success"><strong>@TempData["UserMessage"].ToString()</strong></div>
+            }
+            <div class="row mt-3 mx-auto">
+                @Html.HiddenFor(m=>m.VinUniqueFlag)
+                <div class="col">
+                    <label class="form-label">Make</label>
+                    <select class="form-select" aria-label="Make select list" id="makeSelect" name="makeSelect">
+                        <option selected disabled hidden>Make</option>
+                        @foreach (var m in Model.Makes)
+                        {
+                            <option value="@m.Value">@m.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="Vehicle.ModelId">Model</label>
+                    @Html.DropDownListFor(m => m.Vehicle.ModelId, new List<SelectListItem>(), new { @class = "form-select", id = "modelSelect" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.ModelId)
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col">
+                    <label class="form-label" for="Vehicle.VehicleTypeId">Type</label>
+                    @Html.DropDownListFor(m => m.Vehicle.VehicleTypeId, Model.VehicleTypes, new { @class = "form-select" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.VehicleTypeId)
+                </div>
+                <div class="col">
+                    <label class="form-label" for="Vehicle.BodyStyleId">Body Style</label>
+                    @Html.DropDownListFor(m => m.Vehicle.BodyStyleId, Model.BodyStyles, new { @class = "form-select" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.BodyStyleId)
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col">
+                    <label class="form-label" for="Vehicle.Year">Year</label>
+                    @Html.TextBoxFor(m => m.Vehicle.Year, new { @class = "form-control", @type = "number", @min = "2000" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.Year)
+                </div>
+                <div class="col">
+                    <label class="form-label" for="Vehicle.TransmissionId">Transmission</label>
+                    @Html.DropDownListFor(m => m.Vehicle.TransmissionId, Model.Transmissions, new { @class = "form-select" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.TransmissionId)
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col">
+                    <label class="form-label" for="Vehicle.ColorId">Color</label>
+                    @Html.DropDownListFor(m => m.Vehicle.ColorId, Model.Colors, new { @class = "form-select" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.ColorId)
+                </div>
+                <div class="col">
+                    <label class="form-label" for="Vehicle.InteriorId">Interior</label>
+                    @Html.DropDownListFor(m => m.Vehicle.InteriorId, Model.Interiors, new { @class = "form-select" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.InteriorId)
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col">
+                    <label class="form-label" for="Vehicle.Mileage">Mileage</label>
+                    @Html.TextBoxFor(m => m.Vehicle.Mileage, new { @class = "form-control", type = "number" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.Mileage)
+                </div>
+                <div class="col">
+                    <label class="form-label" for="Vehicle.Vin">VIN #</label>
+                    @Html.TextBoxFor(m => m.Vehicle.Vin, new { @class = "form-control", @minlength = "16", @maxlength = "16" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.Vin, "", new { @style=""})
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col">
+                    <label class="form-label" for="Vehicle.Msrp">MSRP</label>
+                    @Html.TextBoxFor(m => m.Vehicle.Msrp, new { @class = "form-control", type = "number" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.Msrp)
+                </div>
+                <div class="col">
+                    <label class="form-label" for="Vehicle.SalePrice">Sale Price</label>
+                    @Html.TextBoxFor(m => m.Vehicle.SalePrice, new { @class = "form-control", type = "number" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.SalePrice)
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col-12">
+                    <label class="form-label" for="Vehicle.Description">Description</label>
+                    @Html.TextAreaFor(m => m.Vehicle.Description, 4, 80, new { @class = "form-control", @style = "min-width: 100%;" })
+                    @Html.ValidationMessageFor(m => m.Vehicle.Description)
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col">
+                    <label class="form-label" for="ImageUpload">Image</label>
+                    <input id="ImageUpload" name="ImageUpload" type="file" class="form-control" required />
+                    <span></span>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary" type="submit" id="saveButton">Save</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#makeSelect').change(function (e) {
+                e.preventDefault();
+                getModels();
+            });
+            $('#Vehicle_Vin').blur(function (e) {
+                e.preventDefault();
+                checkVin();
+            });
+        });
+
+        function getModels() {
+            var selected = $('#makeSelect').val();
+
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44380/api/inventory/models/' + selected,
+                success: function (response) {
+                    $('#modelSelect').empty();
+
+                    const options = [];
+
+                    $.each(response, function (index, m) {
+                        var row = '<option value="' + m.ModelId + '">' + m.ModelName + '</option>';
+                        options.push(row);
+                    });
+
+                    var html = options.join('');
+
+                    $('#modelSelect').append(html);
+                },
+                error: function (response) {
+                    alert(response.Message);
+                }
+            });
+        }
+
+        $('#frmAddVehicle').validate({
+            rules: {
+                'Vehicle.MakeId': {
+                    required: true
+                },
+                'Vehicle.ModelId': {
+                    required: true
+                },
+                'Vehicle.VehicleTypeId': {
+                    required: true
+                },
+                'Vehicle.BodyStyleId': {
+                    required: true
+                },
+                'Vehicle.Year': {
+                    required: true,
+                    number: true,
+                    min: 2000
+                },
+                'Vehicle.TransmissionId': {
+                    required: true
+                },
+                'Vehicle.ColorId': {
+                    required: true
+                },
+                'Vehicle.InteriorId': {
+                    required: true
+                },
+                'Vehicle.Mileage': {
+                    required: true,
+                    number: true,
+                    min: 0
+                },
+                'Vehicle.Vin': {
+                    required: true,
+                    maxlength: 16,
+                    minlength: 16
+                },
+                'Vehicle.Msrp': {
+                    required: true,
+                    number: true,
+                    min: 1
+                },
+                'Vehicle.SalePrice': {
+                    required: true,
+                    number: true,
+                    min: 1
+                },
+                'Vehicle.Description': {
+                    required: true,
+                    maxlength: 200
+                }
+            },
+            messages: {
+                'Vehicle.MakeId': 'Please select a Make',
+                'Vehicle.ModelId': 'Please select a Model',
+                'Vehicle.VehicleTypeId': 'Please select a Type',
+                'Vehicle.BodyStyleId': 'Please select a Body Style',
+                'Vehicle.Year': {
+                    required: 'Please enter a Year',
+                    number: 'Year must be a number',
+                    minlength: 'Year must be 4 digits long',
+                    maxlength: 'Year must be 4 digits long',
+                    min: 'Year must be at least 2000'
+                },
+                'Vehicle.TransmissionId': 'Please select a Transmission',
+                'Vehicle.ColorId': 'Please select a Color',
+                'Vehicle.InteriorId': 'Please select an Interior',
+                'Vehicle.Mileage': {
+                    required: 'Please enter the current Mileage',
+                    number: 'Mileage must be a number',
+                    min: 'Mileage cannot less than 0'
+                },
+                'Vehicle.Vin': {
+                    required: 'Please enter a VIN #',
+                    minlength: 'VIN must be 16 characters long',
+                    maxlength: 'VIN must be 16 characters long'
+                },
+                'Vehicle.Msrp': {
+                    required: 'Please enter the MSRP',
+                    number: 'MSRP must be a number',
+                    min: 'MSRP must be positive'
+                },
+                'Vehicle.SalePrice': {
+                    required: 'Please enter the Sale Price',
+                    number: 'Sale Price must be a number',
+                    min: 'Sale Price must be positive'
+                },
+                'Vehicle.Description': {
+                    required: 'Please enter a description of the Vehicle',
+                    maxlength: 'Description cannot exceed 200 characters'
+                }
+            }
+        });
+
+        function checkVin() {
+            var vin = $('#Vehicle_Vin').val().trim();
+            var length = vin.length;
+
+            if (length == 16) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://localhost:44380/api/inventory/checkvins/0/?vin=' + vin,
+                    success: function (response) {
+                        $('#VinUniqueFlag').val(response);
+                        if (response) {
+                            $('#Vehicle_Vin').siblings('label').removeClass('has-error').addClass('has-success');
+                            $('#Vehicle_Vin').siblings('label').html("VIN #");
+                        }
+                        else {
+                            $('#Vehicle_Vin').siblings('label').removeClass('has-success').addClass('has-error');
+                            $('#Vehicle_Vin').siblings('label').html("VIN #");
+                            $('#Vehicle_Vin').siblings('label').append(' belongs to another vehicle');
+                        }
+                    },
+                    error: function (response) {
+                        alert('Error checking VIN # for uniqueness');
+                    }
+                });
+            }
+            else {
+                $('#Vehicle_Vin').siblings('label').html("VIN #");
+            }
+        }
+    </script>
+}

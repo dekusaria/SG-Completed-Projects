@@ -1,0 +1,44 @@
+﻿@model GuildCars.UI.Models.InventorySearchVM
+
+<div id="searchContainer" class="container px-4">
+    <div class="row">
+        <h3>Quick Search</h3>
+    </div>
+    <div class="row gx-5">
+        <form id="searchForm">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg">
+                    <label for="searchTerm" class="col-form-label" hidden></label>
+                    <input name="searchTerm" type="text" class="form-control" id="searchTerm" placeholder="Search by Make, Model, or Year" />
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="row">
+                        <div class="col-sm">
+                            @Html.DropDownList("minPrice", Model.MinPrice, "Min Price", new { @class = "form-select" })
+                        </div>
+                        <div class="col-sm">
+                            @Html.DropDownList("maxPrice", Model.MaxPrice, "Max Price", new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="row">
+                        <div class="col-sm">
+                            @Html.DropDownList("minYear", Model.MinYear, "Min Year", new { @class = "form-select" })
+                        </div>
+                        <div class="col-sm">
+                            @Html.DropDownList("maxYear", Model.MaxYear, "Max Year", new { @class = "form-select" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-4 offset-4">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

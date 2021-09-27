@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GuildCars.Models.Tables.Special>
+@{
+    ViewBag.Title = "Specials";
+}
+
+<div class="row">
+    <h2 class="page-header">Specials</h2>
+</div>
+
+@if (Model.Any())
+{
+    <div class="container">
+        @foreach (var special in Model)
+        {
+            <div class="row special-card shadow" style="align-items: center;">
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <img class="img-thumbnail" style="border:none;" src="~/Assets/dollarsign.png" />
+                </div>
+                <div class="col-sm-8 col-md-9 col-lg-10">
+                    <div class="row">
+                        <h3>@special.SpecialTitle</h3>
+                    </div>
+                    <div class="row">
+                        <p>@special.SpecialDescription</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 offset-md-4">
+                <h3>There are currently no Specials, check again later!</h3>
+            </div>
+        </div>
+    </div>
+}

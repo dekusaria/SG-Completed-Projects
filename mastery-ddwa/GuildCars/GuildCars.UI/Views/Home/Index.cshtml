@@ -1,0 +1,80 @@
+﻿@model GuildCars.UI.Models.HomeVM
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron container-md" id="homeHeader">
+    <div class="row">
+        <div class="col-sm-4 mx-auto">
+            <img src="~/Assets/guildCarsLogo.png" class="img-fluid" alt="Guild Cars Logo" />
+        </div>
+        <div class="col-sm-8 shadow-lg" id="saleHeader">
+            <div class="row my-4 align-items-center">
+                <div class="col">
+                    <div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" onclick="window.location.href='/Home/Specials'">
+                                <div class="row mx-auto justify-content-center" style="text-align: center;">
+                                    <div class="col-auto mt-3">
+                                        <h2>BIG OL' SALES!</h2>
+                                        <p>Check out our Special Offers before it's TOO LATE!</p>
+                                    </div>
+                                </div>
+                                <div class="row mx-auto justify-content-center">
+                                    <div class="col-2">
+                                        <img src="~/Assets/dollarsign.png" class="img-fluid" style="max-height: 100px" />
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="~/Assets/dollarsign.png" class="img-fluid" style="max-height: 100px" />
+                                    </div>
+                                    <div class="col-2">
+                                        <img src="~/Assets/dollarsign.png" class="img-fluid" style="max-height: 100px" />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            @foreach (var special in Model.Specials)
+                            {
+                                <div class="carousel-item" onclick="window.location.href='/Home/Specials'">
+                                    <div class="row mx-auto justify-content-center" style="text-align: justify;">
+                                        <div class="col-auto">
+                                            <h2>@special.SpecialTitle</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row mx-auto justify-content-center" style="text-align: justify;">
+                                        <div class="col-8">
+                                            <h4>@special.SpecialDescription</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        @foreach (var vehicle in Model.Featured)
+        {
+            <div class="col-sm-3">
+                <div class="card text-center shadow">
+                    <p><img src="/Images/@vehicle.ImageFileName" /></p>
+                    <p><h5 class="card-title">@vehicle.Year @vehicle.MakeName @vehicle.ModelName</h5></p>
+                    <p class="card-text"><strong>@vehicle.SalePrice.ToString("C")</strong></p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

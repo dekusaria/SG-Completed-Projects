@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="page-header">Reports</h2>
+    </div>
+</div>
+
+<div class="row mx-auto justify-content-center">
+    <div class="col-4" id="reportsLinks">
+        <div class="row mx-auto justify-content-around">
+            <div class="col-6">
+                @Html.ActionLink("Inventory Report", "Inventory", "Reports", null, new { @class = "btn btn-primary shadow" })
+            </div>
+            <div class="col-6">
+                @Html.ActionLink("Sales Report", "Sales", "Reports", null, new { @class = "btn btn-primary shadow" })
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\bin\Debug\netstandard2.0\GuildCars.Models.deps.json
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\bin\Debug\netstandard2.0\GuildCars.Models.dll
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\obj\Debug\netstandard2.0\GuildCars.Models.csprojAssemblyReference.cache
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\obj\Debug\netstandard2.0\GuildCars.Models.AssemblyInfoInputs.cache
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\obj\Debug\netstandard2.0\GuildCars.Models.AssemblyInfo.cs
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\bin\Debug\netstandard2.0\GuildCars.Models.pdb
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\obj\Debug\netstandard2.0\GuildCars.Models.dll
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\obj\Debug\netstandard2.0\GuildCars.Models.pdb
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Models\obj\Debug\netstandard2.0\GuildCars.Models.csproj.CoreCompileInputs.cache

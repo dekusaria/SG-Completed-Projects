@@ -1,0 +1,86 @@
+﻿@model GuildCars.UI.Models.SpecialsVM
+@{
+    ViewBag.Title = "Specials";
+}
+
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-8 offset-sm-0 offset-md-1 offset-lg-2">
+        <h2 class="page-header">Specials</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div id="addSpecialContainer" class="col-sm-12 col-md-10 col-lg-8 offset-sm-0 offset-md-1 offset-lg-2">
+        @using (Html.BeginForm("Specials", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddSpecial", name = "frmAddSpecial", @class = "row g-3" }))
+        {
+            @Html.ValidationSummary()
+            if (TempData["UserMessage"] != null)
+            {
+                <div class="alert alert-success"><strong>@TempData["UserMessage"].ToString()</strong></div>
+            }
+            <div class="row mt-3 mx-auto justify-content-evenly">
+                <div class="col-auto">
+                    <h4>Add Special</h4>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label">Title</label>
+                    @Html.TextBoxFor(m => m.Special.SpecialTitle, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row mt-3 mx-auto">
+                <div class="col">
+                    <label class="form-label">Description</label>
+                    @Html.TextAreaFor(m => m.Special.SpecialDescription, 8, 50, new { @class = "form-control", @style = "min-width: 100%;" })
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary" type="submit" id="frmSpecialSaveButton">Save</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.Specials.Any())
+{
+    <div class="row">
+        <div class="col-12">
+            @foreach (var special in Model.Specials)
+            {
+                <div class="row special-card shadow" style="align-items: center;">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <img class="img-thumbnail" style="border:none;" src="~/Assets/dollarsign.png" />
+                    </div>
+                    <div class="col-sm-8 col-md-9 col-lg-10">
+                        <div class="row">
+                            <h3>@special.SpecialTitle</h3>
+                        </div>
+                        <div class="row">
+                            <p>@special.SpecialDescription</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 offset-9">
+                                @using (Html.BeginForm("DeleteSpecial", "Admin", FormMethod.Post))
+                                {
+                                    @Html.Hidden("specialId", special.SpecialId)
+                                    <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this special?')">Delete</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 offset-md-4">
+                <h3>There are currently no Specials, check again later!</h3>
+            </div>
+        </div>
+    </div>
+}

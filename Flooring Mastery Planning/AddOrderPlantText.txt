@@ -1,0 +1,39 @@
+@startuml
+
+title Controller -> Add Order - Sequence Diagram
+
+View -> Controller
+
+Controller -> BLL: ReadAllProducts()
+BLL -> ProductRepository: ReadAll()
+ProductRepository -> BLL: IEnumerable<Product>
+BLL -> Controller: IEnumerable<Product>
+Controller -> View: GetNewOrderInfo(IEnumerable<Product>)
+View -> Controller: Order
+
+Controller -> BLL: ReviewOrder(ReviewOrderResponse)
+
+BLL -> TaxRepository: ReadById(string)
+TaxRepository -> BLL: Tax
+BLL -> ProductRepository: ReadById(string)
+ProductRepository -> BLL: Product
+
+BLL -> Controller: ReviewOrderResponse
+
+Controller -> View: DisplaySingleOrder(Order)
+View -> Controller: void
+
+Controller -> View: ConfirmChange()
+View -> Controller: bool
+
+Controller -> BLL: CreateNewOrder(AddOrderResponse)
+
+BLL -> OrderRepository: Create(Order)
+OrderRepository -> BLL: Order
+
+BLL -> Controller: AddOrderResponse 
+
+Controller -> View: ShowActionSuccess(bool)
+View -> Controller: void
+
+@enduml

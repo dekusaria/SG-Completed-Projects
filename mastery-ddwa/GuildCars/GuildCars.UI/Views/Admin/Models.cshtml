@@ -1,0 +1,66 @@
+﻿@model GuildCars.UI.Models.ModelsVM
+@{
+    ViewBag.Title = "Models";
+}
+
+<div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-8 offset-sm-0 offset-md-1 offset-lg-2">
+        <h2 class="page-header">Models</h2>
+    </div>
+</div>
+
+<div class="row mx-auto justify-content-evenly">
+    <div id="addModelContainer" class="col-sm-12 col-md-10 col-lg-8">
+        @using (Html.BeginForm("Models", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmAddModel", name = "frmAddModel", @class = "row-g2" }))
+        {
+            @Html.ValidationSummary()
+            if (TempData["UserMessage"] != null)
+            {
+                <div class="alert alert-success"><strong>@TempData["UserMessage"].ToString()</strong></div>
+            }
+            <div class="row my-3 gap-1 align-items-center justify-content-center">
+                <div class="col-sm-2 col-md-auto">
+                    <label class="form-label" for="Model.ModelName">New Model</label>
+                </div>
+                <div class="col-sm-8 col-md-auto">
+                    @Html.TextBoxFor(m => m.NewModel.ModelName, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-2 col-md-auto">
+                    <label class="form-label" for="Model.MakeId">Make</label>
+                </div>
+                <div class="col-sm-8 col-md-auto">
+                    @Html.DropDownListFor(m=>m.NewModel.MakeId, new SelectList(Model.Makes, "MakeId", "MakeName"), new { @class="form-select"})
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit" id="frmAddModelSave">Save</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div id="" class="col-sm-12 col-md-8 col-lg-6">
+        <table id="makesTable" class="table table-success table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Date Added</th>
+                    <th>Added by User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model.Models.OrderBy(m=>m.MakeId))
+                {
+                    <tr>
+                        <td>@Model.Makes.FirstOrDefault(ma=>ma.MakeId == m.MakeId).MakeName</td>
+                        <td>@m.ModelName</td>
+                        <td>@m.DateAdded.ToString("M/dd/yyyy")</td>
+                        <td>@m.EmployeeEmail</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

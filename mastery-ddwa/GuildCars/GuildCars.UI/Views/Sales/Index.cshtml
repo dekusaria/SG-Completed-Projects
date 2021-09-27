@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <h2 class="page-header">Sales</h2>
+</div>
+
+@Html.Partial("_QuickSearchPartial")
+
+<div class="container">
+    <div class="row" id="searchResults">
+
+    </div>
+</div>
+
+<input type="hidden" name="vehicleTypeId" id="vehicleTypeId" value="0" />
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/app/vehicleSearch.js")"></script>
+    <script type="text/javascript">
+       var imagePath = '@Url.Content("~/Images/")';
+       var buttonPath = '@Url.Action("Purchase", "Sales")';
+       var buttonText = 'Purchase';
+    </script>
+}

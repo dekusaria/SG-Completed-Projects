@@ -1,0 +1,63 @@
+@startuml
+
+title Controller -> Edit Order - Sequence Diagram
+
+View -> Controller
+
+Controller -> View: GetOrderDate()
+View -> Controller: DateTime
+
+Controller -> BLL: ReadAllOrders(AllOrdersResponse)
+BLL -> OrderRepository: ReadAllByDate(DateTime)
+
+OrderRepository -> BLL: Dictionary<int,Order>
+BLL -> Controller: AllOrdersResponse
+
+Controller -> View: DisplayAllOrders(Dictionary<int,Order>, DateTime)
+View -> Controller: void
+
+Controller -> View: GetOrderId()
+View -> Controller: int
+
+Controller -> BLL: ReadOrderByIdAndOrderDate(ReadOrderResponse)
+BLL -> OrderRepository: ReadById(int, DateTime)
+
+OrderRepository -> BLL: Order
+BLL -> Controller: ReadOrderResponse
+
+Controller -> View: DisplaySingleOrder(Order)
+View -> Controller: void
+
+Controller -> View: ConfirmChange()
+View -> Controller: bool
+
+Controller -> BLL: ReadAllProducts()
+BLL -> ProductRepository: ReadAll()
+ProductRepository -> BLL: IEnumerable<Product>
+BLL -> Controller: IEnumerable<Product>
+
+Controller -> View: GetEditOrderInfo(Order, IEnumerable<Product>)
+View -> Controller: Order
+
+Controller -> BLL: ReviewOrder(ReviewOrderResponse)
+BLL -> TaxRepository: ReadById(string)
+TaxRepository -> BLL: Tax
+BLL -> ProductRepository: ReadById(string)
+ProductRepository -> BLL: Product
+
+BLL -> Controller: ReviewOrderResponse
+
+Controller -> View: DisplaySingleOrder(Order)
+View -> Controller: void
+
+Controller -> View: ConfirmChange()
+View -> Controller: bool
+
+Controller -> BLL: UpdateOrder(EditOrderResponse)
+BLL -> OrderRepository: Edit(Order)
+OrderRepository -> BLL: Order
+BLL -> Controller: EditOrderResponse
+
+Controller -> View: ShowActionSuccess(bool)
+View -> Controller: void
+@enduml

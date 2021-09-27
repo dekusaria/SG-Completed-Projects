@@ -1,0 +1,16 @@
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\DvdLibrary.Models.deps.json
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\DvdLibrary.Models.dll
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\obj\Debug\netstandard2.0\DvdLibrary.Models.csprojAssemblyReference.cache
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\obj\Debug\netstandard2.0\DvdLibrary.Models.AssemblyInfoInputs.cache
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\obj\Debug\netstandard2.0\DvdLibrary.Models.AssemblyInfo.cs
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\DvdLibrary.Models.pdb
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\obj\Debug\netstandard2.0\DvdLibrary.Models.csproj.CoreCompileInputs.cache
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\obj\Debug\netstandard2.0\DvdLibrary.Models.dll
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\obj\Debug\netstandard2.0\DvdLibrary.Models.pdb
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.dll
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\System.Configuration.dll
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\System.Security.dll
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\System.ComponentModel.DataAnnotations.xml
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\System.Configuration.xml
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\bin\Debug\netstandard2.0\System.Security.xml
+C:\Repos\online-net-dekusaria\Summatives\m9-summative\DvdLibrary\DvdLibrary.Models\obj\Debug\netstandard2.0\DvdLibrary.Models.csproj.CopyComplete

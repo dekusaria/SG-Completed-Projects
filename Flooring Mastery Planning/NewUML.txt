@@ -1,0 +1,185 @@
+@startuml
+
+title Classes - Class Diagram
+
+
+package View
+{
+    class ConsoleIO
+    {
+	+DisplayMenuGetUserChoice(): int
+        +DisplayAllOrders(): void {allOrders: IEnumerable<Order>}
+	+DisplaySingleOrder(): void {order: Order}
+        +DisplayAllProducts(): void {allProducts: IEnumerable<Product>}
+	-DisplayHeader(): void {title: string}
+	+GetNewOrderInfo(): Order
+	+GetEditOrderInfo(): Order {originalOrder: Order}
+        +GetUserInput(): string {prompt: string}
+        +GetOrderArea(): decimal {}
+        +GetOrderDate(): DateTime {}
+	+GetOrderId(): int {}
+        +Confirm(): bool {prompt: string}
+	+ShowActionSuccess(): void {action: string, success: bool, message: string}
+    }
+}
+
+package Controller
+{
+    class OrderManager
+    {
+	-view: ConsoleIO
+	-rules: OrderRules
+
+	+Run(): void
+        +LookupOrders(): void
+        +AddOrder(): void
+        +EditOrder(): void
+        +RemoveOrder(): void
+    }
+}
+
+package BLL
+{
+    class OrderRules
+    {
+	-orderRepository: OrderRepository
+	-productRepo: IRepository
+	-taxRepo: IRepository
+
+	+ReadAllOrders(): AllOrdersResponse {response: AllOrdersResponse}
+	+ReadOrderByIdAndOrderDate(): ReadOrderResponse {response: ReadOrderResponse}
+	+ReviewOrder(): ReviewOrderResponse {response: ReviewOrderResponse}
+        +CreateNewOrder(): AddOrderResponse {resposne: AddOrderResponse}
+	+UpdateOrder(): EditOrderResponse {response: EditOrderResponse}
+	+DeleteOrder(): RemoveOrderResponse {respone: RemoveOrderResponse}
+	+ReadAllProducts(): IEnumerable<Product>
+	+ReadSingleProduct(): Product {productName: string}
+	+LookupStateTax(): Tax {StateAbbreviation: string}
+    }
+    class OrderRulesFactory
+    {
+	+Create: OrderRules
+    }   
+}
+
+package Data
+{
+    class OrderRepository
+    {
+	-repo: Dictionary<int,Order>
+	-filePath: string
+	-saveFlag: bool
+
+	+Create(): Order {newOrder: Order}
+	+Delete(): bool {orderToDelete: Order}
+	+Edit(): Order {editedOrder: Order}
+	+ReadAll(): Dictionary<int,Order> {orderDate: DateTime}
+	+ReadById(): Order {orderId: int, orderDate: Datetime}
+	+SaveAll(): void {allOrders: Dictionary<int,Order>}
+	-AssignOrderNumber(): int {newOrder: Order}
+	-ConvertDateTimeToFilePath(): string {date: DateTime}
+    }
+    class TaxRepository
+    {
+        +Create(): Tax {newTax: Tax}
+	+Delete(): bool {taxToDelete: Tax}
+	+Edit(): Tax {taxToEdit: Tax}
+	+ReadAll(): IEnumerable<Tax> {}
+	+ReadById(): Tax {stateAbbreviation: string}
+	+SaveAll(): bool {allTaxes: Dictionary<string,Tax>}
+    }
+    class ProductRepository
+    {
+        +Create(): Product {newProduct: Product}
+	+Delete(): bool {productToDelete: Product}
+	+Edit(): Product {editedProduct: Product}
+	+ReadAll(): IEnumerable<Product> {}
+	+ReadById(): Product {productName: string}
+	+SaveAll(): bool {allProducts: IEnumerable<Product>}
+    }
+}
+
+package Models
+{
+    class Order
+    {
+        +OrderNumber: int
+        +OrderDate: DateTime
+        +CustomerName: string
+        +State: string
+        +TaxRate: decimal
+        +ProductType: string
+        +Area: decimal
+        +CostPerSquareFoot: decimal
+        +LaberCostPerSquareFoot: decimal
+        +MaterialCost: decimal
+        +LaborCost: decimal
+        +Tax: decimal
+        +Total: decimal
+    }
+    class Tax
+    {
+        +StateAbbreviation: string
+        +StateName: string
+        +TaxRate: decimal
+    }
+    class Product
+    {
+        +ProductType: string
+        +CostPerSquareFoot: decimal
+        +LaborCostPerSquareFoot: decimal
+    }
+    class Response
+    {
+        +Success: bool
+        +Message: string
+    }
+    class AllOrdersResponse
+    {
+        +Orders: Dictionary<int,Order>
+        +OrderDate: DateTime
+    }
+    class AddOrderResponse
+    {
+        +Order: Order
+        +OrderDate: DateTime
+    }
+    class EditOrderResponse
+    {
+        +OriginalOrder: Order
+        +EditedOrder: Order
+        +OrderDate: DateTime
+    }
+    class RemoveOrderResponse
+    {
+        +OrderToRemove: Order
+        +OrderDate: DateTime
+    }
+    class ReviewOrderResponse
+    {
+	+Order: Order
+    }
+    class ReadOrderResponse
+    {
+	+Order: Order
+	+OrderNumber: int
+	+OrderDate: DateTime
+    }
+    class AllProductsResponse
+    {
+	+AllProducts: IEnumerable<Product>
+    }
+    class IRepository
+    {
+        +Create(): TEntity {newEntity: TEntity}
+	+Delete(): bool {entityToDelete: TEntity}
+	+Edit(): TEntity {entityToEdit: TEntity}
+	+ReadAll(): IEnumerable<TEntity> {}
+	+ReadById(): TEntity {Id: object}
+	+SaveAll(): bool {allEntities: IEnumerable<TEntity>}
+    }
+}
+
+
+
+@enduml

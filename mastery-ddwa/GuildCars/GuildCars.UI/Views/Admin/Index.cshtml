@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <h2 class="page-header">Admin</h2>
+    <p style="margin-left: 10px; margin-bottom: 25px;">@Html.ActionLink("Add Vehicle", "AddVehicle", "Admin", null, new { @class = "btn btn-primary" })</p>
+</div>
+
+@Html.Partial("_QuickSearchPartial")
+
+<div class="container">
+    <div class="row" id="searchResults">
+
+    </div>
+</div>
+
+<input type="hidden" name="vehicleTypeId" id="vehicleTypeId" value="0" />
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/app/vehicleSearch.js")"></script>
+    <script type="text/javascript">
+       var imagePath = '@Url.Content("~/Images/")';
+       var buttonPath = '@Url.Action("EditVehicle", "Admin")';
+       var buttonText = 'Edit';
+    </script>
+}

@@ -1,0 +1,228 @@
+@startuml
+
+title Classes - Class Diagram
+
+
+package View
+{
+    class Program
+    {
+        +Main(): void
+    }
+    
+    class ConsoleIO
+    {
+	+DisplayMenuGetUserChoice(): int
+        +DisplayAllOrders(): void {orders: Dictionary<int,Order>}
+	+DisplaySingleOrder(): void {order: Order}
+        +DisplayProducts(): void {allProducts: List<Product>}
+	+GetNewOrderInfo(): Order
+	+SelectProduct(): string
+        +GetUserInput(): string {prompt: string}
+        +GetOrderArea(): decimal {prompt: string}
+        +GetOrderDate(): DateTime {prompt: string}
+	+GetOrderId(): int {prompt: string}
+        +ConfirmChange(): bool {prompt: string}
+	+ShowActionSuccess(): void {response: Response}
+    }
+}
+
+package Controller
+{
+    class OrderManager
+    {
+	-view: ConsoleIO
+	-rules: OrderRules
+
+	+Run(): void
+        +LookupOrders(): void
+        +AddOrder(): void
+        +EditOrder(): void
+        +RemoveOrder(): void
+    }
+}
+
+package BLL
+{
+    class OrderRules
+    {
+	-orderRepository: IOrderRepository
+	-productRepo: IProductRepository
+	-taxRepo: ITaxRepository
+
+	+ReadAllOrders(): AllOrdersResponse {date: DateTime}
+	+ReadOrderById(): Order {orderId: int}
+	+CalculateOrderCost(): Order {order: Order}
+        +CreateNewOrder(): AddOrderResponse {order: Order}
+	+UpdateOrder(): EditOrderResponse {order: Order}
+	+DeleteOrder(): RemoveOrderResponse {order: Order}
+	+ReadAllProducts(): List<Product>
+	+ReadSingleProduct(): Product {productName: string}
+	+ReadAllTaxes(): Dictionary<string,Tax>
+	+LookupStateTax(): Tax {StateAbbreviation: string}
+    }
+    class OrderRulesFactory
+    {
+	+Create: OrderRules
+    }   
+}
+
+package Data
+{
+    class OrderRepository
+    {
+	+Create(): Order {newOrder: Order}
+	+Delete(): bool {orderToDelete: Order}
+	+Edit(): Order {editedOrder: Order}
+	+ReadAll(): Dictionary<int,Order> {orderDate: DateTime}
+	+ReadById(): Order {orderNumber: int, orderDate: DateTime}
+	+SaveAll(): bool {allOrders: Dictionary<int,Order>}
+	-AssignOrderNumber(): int {newOrder: Order}
+    }
+    class TestOrderRepository
+    {
+	-repo: Dictionary<int,Order>
+	-testDate: DateTime
+
+	+Create(): Order {newOrder: Order}
+	+Delete(): bool {orderToDelete: Order}
+	+Edit(): Order {editedOrder: Order}
+	+ReadAll(): Dictionary<int,Order> {orderDate: DateTime}
+	+ReadById(): Order {orderNumber: int, orderDate: DateTime}
+	+SaveAll(): bool {allOrders: Dictionary<int,Order>}
+	-AssignOrderNumber(): int {newOrder: Order}
+    }
+    class TaxRepository
+    {
+        +CreateNewTax(): Tax {newTax: Tax}
+	+DeleteTax(): bool {taxToDelete: Tax}
+	+EditTax(): Tax {taxToEdit: Tax}
+	+LoadAllTaxes(): Dictionary<string, Tax> {}
+	+LoadSingleTax(): Tax {stateAbbreviation: string}
+	+SaveAll(): bool {allTaxes: Dictionary<string,Tax>}
+    }
+    class TestTaxRepository
+    {
+	-repo: Dictionary<string,Tax>
+	
+	+CreateNewTax(): Tax {newTax: Tax}
+	+DeleteTax(): bool {taxToDelete: Tax}
+	+EditTax(): Tax {taxToEdit: Tax}
+	+LoadAllTaxes(): Dictionary<string, Tax> {}
+	+LoadSingleTax(): Tax {stateAbbreviation: string}
+	+SaveAll(): bool {allTaxes: Dictionary<string,Tax>}
+    }
+    class ProductRepository
+    {
+        +CreateNewProduct(): Product {newProduct: Product}
+	+DeleteProduct(): bool {productToDelete: Product}
+	+EditProduct(): Product {editedProduct: Product}
+	+LoadAllProducts(): List<Product> {}
+	+LoadSingleProduct(): Product {productName: string}
+	+SaveAll(): bool {allProducts: List<Product>}
+    }
+    class TestProductRepository
+    {
+	-repo: List<Product>
+
+	+CreateNewProduct(): Product {newProduct: Product}
+	+DeleteProduct(): bool {productToDelete: Product}
+	+EditProduct(): Product {editedProduct: Product}
+	+LoadAllProducts(): List<Product> {}
+	+LoadSingleProduct(): Product {productName: string}
+	+SaveAll(): bool {allProducts: List<Product>}
+    }
+}
+
+package Models
+{
+    class Order
+    {
+        +OrderNumber: int
+        +OrderDate: DateTime
+        +CustomerName: string
+        +State: string
+        +TaxRate: decimal
+        +ProductType: string
+        +Area: decimal
+        +CostPerSquareFoot: decimal
+        +LaberCostPerSquareFoot: decimal
+        +MaterialCost: decimal
+        +LaborCost: decimal
+        +Tax: decimal
+        +Total: decimal
+    }
+    class Tax
+    {
+        +StateAbbreviation: string
+        +StateName: string
+        +TaxRate: decimal
+    }
+    class Product
+    {
+        +ProductType: string
+        +CostPerSquareFoot: decimal
+        +LaborCostPerSquareFoot: decimal
+    }
+    class Response
+    {
+        +Success: bool
+        +Message: string
+    }
+    class AllOrdersResponse
+    {
+        +Orders: Dictionary<int,Order>
+        +Date: DateTime
+    }
+    class AddOrderResponse
+    {
+        +Order: Order
+        +Date: DateTime
+    }
+    class EditOrderResponse
+    {
+        +OriginalOrder: Order
+        +EditedOrder: Order
+        +Date: DateTime
+    }
+    class RemoveOrderResponse
+    {
+        +OrderToRemove: Order
+        +Date: DateTime
+    }
+    class DisplayProductsResponse
+    {
+	+AllProducts: List<Product>
+    }
+    class IOrderRepository
+    {
+        +Create(): Order {newOrder: Order}
+	+Delete(): bool {orderToDelete: Order}
+	+Edit(): Order {editedOrder: Order}
+	+ReadAll(): Dictionary<int,Order> {orderDate: DateTime}
+	+ReadById(): Order {orderNumber: int, orderDate: DateTime}
+	+SaveAll(): bool {allOrders: Dictionary<int,Order>}
+    }
+    class IProductRepository
+    {
+	+CreateNewTax(): Tax {newTax: Tax}
+	+DeleteTax(): bool {taxToDelete: Tax}
+	+EditTax(): Tax {taxToEdit: Tax}
+	+LoadAllTaxes(): Dictionary<string, Tax> {}
+	+LoadSingleTax(): Tax {stateAbbreviation: string}
+	+SaveAll(): bool {allTaxes: Dictionary<string,Tax>}
+    }
+    class ITaxRepository
+    {
+	+CreateNewTax(): Tax {newTax: Tax}
+	+DeleteTax(): bool {taxToDelete: Tax}
+	+EditTax(): Tax {taxToEdit: Tax}
+	+LoadAllTaxes(): Dictionary<string, Tax> {}
+	+LoadSingleTax(): Tax {stateAbbreviation: string}
+	+SaveAll(): bool {allTaxes: Dictionary<string,Tax>}
+    }
+}
+
+
+
+@enduml

@@ -1,0 +1,16 @@
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\GuildCars.Models.dll
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\obj\Debug\netstandard2.0\GuildCars.Data.csprojAssemblyReference.cache
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\obj\Debug\netstandard2.0\GuildCars.Data.AssemblyInfoInputs.cache
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\obj\Debug\netstandard2.0\GuildCars.Data.AssemblyInfo.cs
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\System.Configuration.dll
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\System.Security.dll
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\System.Configuration.xml
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\System.Security.xml
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\GuildCars.Data.deps.json
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\GuildCars.Data.dll
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\GuildCars.Data.pdb
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\bin\Debug\netstandard2.0\GuildCars.Models.pdb
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\obj\Debug\netstandard2.0\GuildCars.Data.csproj.CoreCompileInputs.cache
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\obj\Debug\netstandard2.0\GuildCars.Data.csproj.CopyComplete
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\obj\Debug\netstandard2.0\GuildCars.Data.dll
+C:\Repos\online-net-dekusaria\Summatives\mastery-ddwa\GuildCars\GuildCars.Data\obj\Debug\netstandard2.0\GuildCars.Data.pdb

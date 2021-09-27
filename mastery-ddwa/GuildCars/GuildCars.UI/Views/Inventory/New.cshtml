@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="page-header">New Inventory</h2>
+        <p>Search to find your perfect New Car!</p>
+    </div>
+</div>
+
+@Html.Partial("_QuickSearchPartial")
+
+<div class="container">
+    <div class="row" id="searchResults">
+
+    </div>
+</div>
+
+<input type="hidden" name="vehicleTypeId" id="vehicleTypeId" value="1" />
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/app/vehicleSearch.js")"></script>
+    <script type="text/javascript">
+       var imagePath = '@Url.Content("~/Images/")';
+       var buttonPath = '@Url.Action("Details", "Inventory")';
+       var buttonText = 'Details';
+    </script>
+    }

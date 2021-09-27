@@ -1,0 +1,172 @@
+USE GuildCars;
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Specials')
+	DROP TABLE Specials
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Purchases')
+	DROP TABLE Purchases
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='PurchaseTypes')
+	DROP TABLE PurchaseTypes
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Contacts')
+	DROP TABLE Contacts
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Customers')
+	DROP TABLE Customers
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Addresses')
+	DROP TABLE Addresses
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='States')
+	DROP TABLE States
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Vehicles')
+	DROP TABLE Vehicles
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Models')
+	DROP TABLE Models
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Makes')
+	DROP TABLE Makes
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Transmissions')
+	DROP TABLE Transmissions
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='BodyStyles')
+	DROP TABLE BodyStyles
+GO
+
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Interiors')
+	DROP TABLE Interiors
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='Colors')
+	DROP TABLE Colors
+GO
+
+IF EXISTS(SELECT * FROM sys.tables WHERE name='VehicleTypes')
+	DROP TABLE VehicleTypes
+GO
+
+CREATE TABLE Transmissions (
+	TransmissionId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	TransmissionType NVARCHAR(10) NOT NULL
+)
+
+CREATE TABLE BodyStyles (
+	BodyStyleId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	BodyStyleType NVARCHAR(16) NOT NULL
+)
+
+CREATE TABLE Makes (
+	MakeId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	MakeName NVARCHAR(20) NOT NULL,
+	DateAdded DATETIME2(0) NOT NULL,
+	EmployeeEmail NVARCHAR(50) NOT NULL
+)
+
+CREATE TABLE States (
+	StateId CHAR(2) NOT NULL PRIMARY KEY,
+	StateName NVARCHAR(16) NOT NULL
+)
+
+CREATE TABLE VehicleTypes (
+	VehicleTypeId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	VehicleTypeName NVARCHAR(4) NOT NULL
+)
+
+CREATE TABLE Interiors (
+	InteriorId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	InteriorType NVARCHAR(20) NOT NULL
+)
+
+CREATE TABLE Colors (
+	ColorId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	ColorName NVARCHAR(20) NOT NULL
+)
+
+CREATE TABLE PurchaseTypes (
+	PurchaseTypeId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	PurchaseTypeName NVARCHAR(20) NOT NULL
+)
+
+CREATE TABLE Addresses (
+	AddressId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	StateId CHAR(2) NOT NULL FOREIGN KEY REFERENCES States(StateId),
+	Street1 NVARCHAR(50) NOT NULL,
+	Street2 NVARCHAR(50) NULL,
+	City NVARCHAR(50) NOT NULL,
+	Zipcode NVARCHAR(9) NOT NULL
+)
+
+CREATE TABLE Customers (
+	CustomerId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	AddressId INT NULL FOREIGN KEY REFERENCES Addresses(AddressId),
+	CustomerFirstName NVARCHAR(50) NOT NULL,
+	CustomerLastName NVARCHAR(50) NOT NULL,
+	CustomerPhone NVARCHAR(12) NULL,
+	CustomerEmail NVARCHAR(50) NULL UNIQUE
+)
+
+CREATE TABLE Contacts (
+	ContactId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	CustomerId INT NOT NULL FOREIGN KEY REFERENCES Customers(CustomerId),
+	ContactMessage NVARCHAR(500) NOT NULL
+)
+
+CREATE TABLE Models (
+	ModelId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	MakeId INT NOT NULL FOREIGN KEY REFERENCES Makes(MakeId),
+	ModelName NVARCHAR(50) NOT NULL,
+	DateAdded DATETIME2(0) NOT NULL,
+	EmployeeEmail NVARCHAR(50) NOT NULL
+)
+
+CREATE TABLE Vehicles (
+	VehicleId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	Vin NCHAR(16) NOT NULL UNIQUE,
+	VehicleTypeId INT NOT NULL FOREIGN KEY REFERENCES VehicleTypes(VehicleTypeId),
+	ModelId INT NOT NULL FOREIGN KEY REFERENCES Models(ModelId),
+	ColorId INT NOT NULL FOREIGN KEY REFERENCES Colors(ColorId),
+	InteriorId INT NOT NULL FOREIGN KEY REFERENCES Interiors(InteriorId),
+	BodyStyleId INT NOT NULL FOREIGN KEY REFERENCES BodyStyles(BodyStyleId),
+	TransmissionId INT NOT NULL FOREIGN KEY REFERENCES Transmissions(TransmissionId),
+	[Year] INT NOT NULL,
+	Mileage INT NOT NULL,
+	Msrp DECIMAL(8,2) NOT NULL,
+	SalePrice DECIMAL(8,2) NOT NULL,
+	[Description] nvarchar(200) NOT NULL,
+	ImageFileName nvarchar(50) NOT NULL,
+	IsFeatured BIT NOT NULL,
+	IsSold BIT NOT NULL
+)
+
+CREATE TABLE Specials (
+	SpecialId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	SpecialTitle NVARCHAR(50) NOT NULL,
+	SpecialDescription NVARCHAR(500) NOT NULL
+)
+
+CREATE TABLE Purchases (
+	PurchaseId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	CustomerId INT NOT NULL FOREIGN KEY REFERENCES Customers(CustomerId),
+	PurchaseTypeId INT NOT NULL FOREIGN KEY REFERENCES PurchaseTypes(PurchaseTypeId),
+	VehicleId INT NOT NULL FOREIGN KEY REFERENCES Vehicles(VehicleId),
+	PurchasePrice DECIMAL(8,2) NOT NULL,
+	PurchaseDate DATETIME2(0) NOT NULL,
+	SoldByEmail NVARCHAR(50) NOT NULL
+)

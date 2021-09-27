@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <img src="~/Assets/guildCarsLogo.png" style="max-height: 30px; padding: 0 8px 4px 0;" />
+                @Html.ActionLink("Guild Cars", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("New Inventory", "New", "Inventory", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Used Inventory", "Used", "Inventory", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Specials", "Specials", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                    @if (Request.IsAuthenticated && (User.IsInRole("sales") || User.IsInRole("admin")))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="salesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sales
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="salesDropdown">
+                                <li>@Html.ActionLink("Sales Inventory", "Index", "Sales", null, new { @class = "dropdown-item" })</li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
+                                <li>@Html.ActionLink("Vehicles", "Index", "Admin", null, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Makes", "Makes", "Admin", null, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Models", "Models", "Admin", null, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Specials", "Specials", "Admin", null, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "dropdown-item" })</li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>@Html.ActionLink("Users", "Users", "Admin", null, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Guild Cars</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

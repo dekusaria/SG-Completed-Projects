@@ -1,0 +1,68 @@
+﻿@model GuildCars.UI.Models.InventoryReportVM
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="page-header">Inventory Report</h2>
+    </div>
+</div>
+
+<div class="row mx-auto justify-content-center">
+    <div class="col-8">
+        <h3>New Vehicles</h3>
+        <table class="table table-striped table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Count</th>
+                    <th>Stock Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var report in Model.NewInventory)
+                {
+                    <tr>
+                        <td>@report.Year</td>
+                        <td>@report.Make</td>
+                        <td>@report.Model</td>
+                        <td>@report.Count</td>
+                        <td>@report.StockValue.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row mx-auto justify-content-center">
+    <div class="col-8">
+        <h3>Used Vehicles</h3>
+        <table class="table table-striped table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Count</th>
+                    <th>Stock Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var report in Model.UsedInventory)
+                {
+                    <tr>
+                        <td>@report.Year</td>
+                        <td>@report.Make</td>
+                        <td>@report.Model</td>
+                        <td>@report.Count</td>
+                        <td>@report.StockValue.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

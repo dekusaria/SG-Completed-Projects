@@ -1,0 +1,158 @@
+﻿@model GuildCars.UI.Models.PurchaseVM
+@{
+    ViewBag.Title = "Purchase";
+}
+
+<div class="row">
+    <h2 class="page-header">Purchase Vehicle</h2>
+</div>
+
+<div class="container vehicle-wide-card shadow">
+    <div class="row">
+        <h3>@Model.Vehicle.Year @Model.Vehicle.MakeName @Model.Vehicle.ModelName</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <img class="img-thumbnail float-start" src="~/Images/@Model.Vehicle.ImageFileName" />
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-9">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <p><strong>Body Style: </strong>@Model.Vehicle.BodyStyleType</p>
+                    <p><strong>Trans: </strong>@Model.Vehicle.TransmissionType</p>
+                    <p><strong>Color: </strong>@Model.Vehicle.ColorName</p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <p><strong>Interior: </strong>@Model.Vehicle.InteriorType</p>
+                    <p>
+                        <strong>Mileage: </strong>
+                        @if (Model.Vehicle.Mileage < 1000)
+                        {
+                            <text>New</text>
+                        }
+                        else
+                        {
+                            @Model.Vehicle.Mileage.ToString("{0:n0}")
+                        }
+                    </p>
+                    <p><strong>VIN #: </strong>@Model.Vehicle.Vin</p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <p><strong>Sale Price: </strong>@Model.Vehicle.SalePrice.ToString("C")</p>
+                    <p><strong>MSRP: </strong>@Model.Vehicle.Msrp.ToString("C")</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-2 offset-lg-2">
+                    <p><strong>Description: </strong></p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <p>@Model.Vehicle.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h2 class="sales-info-header">Sales Information</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            @using (Html.BeginForm("Purchase", "Sales", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmPurchase", @class = "row g-2" }))
+            {
+                @Html.ValidationSummary()
+                @Html.HiddenFor(m => m.Vehicle.VehicleId, htmlAttributes: new { @value = "@Model.Vehicle.VehicleId" })
+                @Html.HiddenFor(m => m.Vehicle.SalePrice, htmlAttributes: new { @value = "@Model.Vehicle.VehicleId" })
+                @Html.HiddenFor(m => m.Vehicle.Msrp, htmlAttributes: new { @value = "@Model.Vehicle.VehicleId" })
+                <div class="col-md-6">
+                    <label class="form-label">First Name</label>
+                    @Html.TextBoxFor(m => m.Customer.CustomerFirstName, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Last Name</label>
+                    @Html.TextBoxFor(m => m.Customer.CustomerLastName, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Phone</label>
+                    @Html.TextBoxFor(m => m.Customer.CustomerPhone, new { @class = "form-control", type = "tel", pattern = "[0=9]{3}-[0-9]{3}-[0-9]{4}" })
+                    <div id="phoneHelp" class="form-text" style="color:white;">ex: XXX-XXX-XXXX</div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    @Html.TextBoxFor(m => m.Customer.CustomerEmail, new { @class = "form-control", type = "email" })
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Street 1</label>
+                    @Html.TextBoxFor(m => m.Address.Street1, new { @class = "form-control" })
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Street 2 (optional)</label>
+                    @Html.TextBoxFor(m => m.Address.Street2, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">City</label>
+                    @Html.TextBoxFor(m => m.Address.City, new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">State</label>
+                    @Html.DropDownListFor(m => m.Address.StateId, Model.States, new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Zipcode</label>
+                    @Html.TextBoxFor(m => m.Address.Zipcode, new { @class = "form-control" })
+                </div>
+                <hr />
+                <div class="col-md-6">
+                    <label class="form-label">Purchase Price</label>
+                    @Html.TextBoxFor(m => m.Purchase.PurchasePrice, new { @class = "form-control", type = "number" })
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Purchase Type</label>
+                    @Html.DropDownListFor(m => m.Purchase.PurchaseTypeId, Model.PurchaseTypes, new { @class = "form-control" })
+                </div>
+                <button class="btn btn-primary">Save</button>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    
+    <script>
+        $(document).ready(function(){
+            $('#frmPurchase').validate({
+                rules: {
+                    'Customer.CustomerFirstName': {
+                        required: true
+                    },
+                    'Customer.CustomerLastName': {
+                        required: true
+                    },
+                    'Address.Street1': {
+                        required: true
+                    },
+                    'Address.City': {
+                        required: true
+                    },
+                    'Address.Zipcode': {
+                        required: true
+                    },
+                    'Address.StateId': {
+                        required: true
+                    },
+                    'Purchase.PurchasePrice': {
+                        required: true
+                    },
+                    'Purchase.PurchaseTypeId': {
+                        required: true
+                    }
+                }
+            });
+        });
+    </script>
+    
+    }

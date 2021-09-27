@@ -1,0 +1,21 @@
+@startuml
+
+title Controller -> LookupOrders - Sequence Diagram
+
+View -> Controller
+
+Controller -> View: GetOrderDate()
+View -> Controller: DateTime
+
+Controller -> BLL: ReadAllOrders(DateTime)
+BLL -> Data: ReadAll(DateTime)
+
+Data -> BLL: Dictionary<int,Order>
+
+BLL -> Controller: AllOrdersResponse
+
+Controller -> View: DisplayOrders(Dictionary<int,Order>)
+View -> Controller: void
+
+
+@enduml
